@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK21'
+        jdk 'JDK17'
         maven 'Maven3'
     }
 
@@ -10,22 +10,23 @@ pipeline {
         stage('Checkout') {
             // write your logic here
             steps{
-                            steps{
             git branch: 'main',
             url: 'https://github.com/expertszen/java-standalone-application.git'
             }
-
+                    
         }
         stage('Build') {
             // write your logic here
             steps{
             bat 'mvn clean compile'
             }
+        }
         stage('Run Application') {
             // write your logic here
-           steps{
+            steps{
             bat 'mvn package'
             }
+        }
         stage('Test') {
             // write your logic here
             steps{
