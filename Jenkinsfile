@@ -39,4 +39,14 @@ pipeline {
             }
         }
     }
+    post {
+    success {
+      echo "Build succeeded — triggering downstream job"
+      // trigger downstream job; wait:false => don't block. Set wait:true to wait and capture result.
+      build job: '291901_java_first_ci_job', wait: false
+    }
+    failure {
+      echo "Build failed — not triggering downstream job"
+    }
+  }
 }
